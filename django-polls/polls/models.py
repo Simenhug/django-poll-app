@@ -6,8 +6,13 @@ from django.utils import timezone
 
 
 # Create your models here.
+class BaseModel(models.Model):
+    class Meta:
+        abstract = True  # specify this model as an Abstract Model
+        app_label = 'polls'
 
-class Question(models.Model):
+
+class Question(BaseModel):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
 
@@ -22,7 +27,9 @@ class Question(models.Model):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
-class Choice(models.Model):
+
+
+class Choice(BaseModel):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)

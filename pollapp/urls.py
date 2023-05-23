@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path("polls/", include("polls.urls")),
+    path("polls/", include("django-polls.polls.urls")),
+    # path("polls/", include("polls.urls")), this is wrong!!!!!!!!
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
